@@ -22,7 +22,7 @@ sudo docker-compose down
 
 ## Acessos
 -   Front-End: *http://localhost:4200*
--   Back-End: *http://localhost:8090*
+-   Back-End: *http://localhost:8091*
 -   PHPMyAdmin: *http://localhost:88*
     - Usuario: root
     - Senha: root
