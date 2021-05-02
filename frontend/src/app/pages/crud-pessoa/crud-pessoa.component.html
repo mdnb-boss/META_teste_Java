@@ -1,0 +1,104 @@
+<div class="content container">
+  <mat-card class="mat-elevation-z3">
+    <mat-card-title>Cadastro de Pessoas</mat-card-title>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>CPF</mat-label>
+            <input matInput required [textMask]="{mask: maskCpf}" [(ngModel)]="pessoaInsert.cpf">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput required [(ngModel)]="pessoaInsert.name">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Sexo</mat-label>
+            <mat-select [(ngModel)]="pessoaInsert.gender">
+              <mat-option value="M">MASCULINO</mat-option>
+              <mat-option value="F">FEMININO</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" [(ngModel)]="pessoaInsert.email">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Data de Nascimento</mat-label>
+            <input matInput [textMask]="{mask: maskAniversario}" required [(ngModel)]="dataNascimento">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Naturalidade</mat-label>
+            <input matInput [(ngModel)]="pessoaInsert.naturalness">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Nacionalidade</mat-label>
+            <input matInput [(ngModel)]="pessoaInsert.nationality">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="accent" (click)="limpar()">Limpar </button>
+      <button mat-raised-button color="primary" (click)="cadastrar()">Cadastrar</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="mat-elevation-z3" style="margin-top: 16px;">
+    <mat-card-title>Pessoas cadastradas</mat-card-title>
+    <mat-card-content>
+      <button mat-button color="primary" (click)="loadListaPessoas()">Atualizar</button>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nome</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cpf">
+          <th mat-header-cell *matHeaderCellDef> CPF</th>
+          <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> Criado em</th>
+          <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd/MM/yyyy HH:mm'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="edit(element)" color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="delete(element)" color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

@@ -1,0 +1,57 @@
+<mat-card class="mat-elevation-z0">
+  <mat-card-title>Editor</mat-card-title>
+  <mat-card-subtitle>Registro #{{ pessoa.id }}</mat-card-subtitle>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>CPF</mat-label>
+          <input matInput required [textMask]="{mask: maskCpf}" [(ngModel)]="pessoa.cpf">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput required  [(ngModel)]="pessoa.name">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Sexo</mat-label>
+          <mat-select [(ngModel)]="pessoa.gender">
+            <mat-option value="M">MASCULINO</mat-option>
+            <mat-option value="F">FEMININO</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" [(ngModel)]="pessoa.email">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Data de Nascimento</mat-label>
+          <input matInput [textMask]="{mask: maskAniversario}" required [(ngModel)]="dataAniversario">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Naturalidade</mat-label>
+          <input matInput [(ngModel)]="pessoa.naturalness">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Nacionalidade</mat-label>
+          <input matInput [(ngModel)]="pessoa.nationality">
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="accent" (click)="dialogRef.close()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="atualizar()">Atualizar</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,57 @@
+version: '3.5'
+services:
+  db:
+    image: mysql:5.7.34
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=teste_meta
+      - MYSQL_USER=teste
+      - MYSQL_PASSWORD=teste
+    networks:
+      - net-backend
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    networks:
+      - net-backend
+    ports:
+      - 88:80
+    environment:
+      PMA_HOST: db:3306
+      MYSQL_ROOT_PASSWORD: rootpass
+
+  crud_backend_api:
+    image: daniel101/meta_teste_backend:latest
+    container_name: crud_backend_api
+    restart: always
+    depends_on:
+      - db
+    expose:
+      - "8091"
+    ports:
+      - "8091:8090"
+    networks:
+      - net-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/teste_meta?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: teste
+      SPRING_DATASOURCE_PASSWORD: teste
+
+  crud_frontend:
+    image: daniel101/meta_teste_backend:latest
+    container_name: crud_frontend
+    ports:
+      - '4200:80'
+    networks:
+      - net-backend
+
+volumes:
+  db_data:
+
+networks:
+  net-backend:
