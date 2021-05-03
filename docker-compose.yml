@@ -34,9 +34,9 @@ services:
     depends_on:
       - db
     expose:
-      - "8091"
+      - 8091
     ports:
-      - "8091:8090"
+      - 8091:8090
     networks:
       - net-backend
     environment:
@@ -50,7 +50,7 @@ services:
       context: frontend
       dockerfile: Dockerfile
     ports:
-      - '4200:80'
+      - 4200:80
     networks:
       - net-backend
 
